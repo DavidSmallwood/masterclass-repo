@@ -1,5 +1,5 @@
 <?php
- 
+
 class Index {
     
     protected $db;
@@ -36,7 +36,7 @@ class Index {
         
         $content .= '</ol>';
         
-        require 'layout.phtml';
+        require '../tpl/layout.phtml';
     }
 }
 
