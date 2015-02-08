@@ -10,6 +10,8 @@
         "phpunit/phpunit": "~4.7@dev"
     },
     "autoload" : {
-      "classmap" : ["src/"]
+      "psr-4" : {
+        "MasterClass\\" : "src/"
+      }
     }
 }

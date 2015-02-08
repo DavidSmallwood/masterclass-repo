@@ -10,13 +10,13 @@ return array(
     ),
     
     'routes' => array(
-        '' => 'index/index',
-        'story' => 'story/index',
-        'story/create' => 'story/create',
-        'comment/create' => 'comment/create',
-        'user/create' => 'user/create',
-        'user/account' => 'user/account',
-        'user/login' => 'user/login',
-        'user/logout' => 'user/logout',
+        '' => 'MasterClass\Controllers\Index:index',
+        'story' => 'MasterClass\Controllers\Story:index',
+        'story/create' => 'MasterClass\Controllers\Story:create',
+        'comment/create' => 'MasterClass\Controllers\Comment:create',
+        'user/create' => 'MasterClass\Controllers\User:create',
+        'user/account' => 'MasterClass\Controllers\User:account',
+        'user/login' => 'MasterClass\Controllers\User:login',
+        'user/logout' => 'MasterClass\Controllers\User:logout',
     ),
 );
