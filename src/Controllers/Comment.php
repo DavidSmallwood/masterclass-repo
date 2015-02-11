@@ -2,15 +2,14 @@
 
 namespace MasterClass\Controllers;
 
-use PDO;
+use MasterClass\Model\Comment as CommentModel;
 
 class Comment {
     
+    protected $commentModel;
+    
     public function __construct($config) {
-        $dbconfig = $config['database'];
-        $dsn = 'mysql:host=' . $dbconfig['host'] . ';dbname=' . $dbconfig['name'];
-        $this->db = new PDO($dsn, $dbconfig['user'], $dbconfig['pass']);
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->commentModel = new CommentModel($config['database']);
     }
     
     public function create() {
@@ -19,15 +18,13 @@ class Comment {
             header("Location: /");
             exit;
         }
-        
-        $sql = 'INSERT INTO comment (created_by, created_on, story_id, comment) VALUES (?, NOW(), ?, ?)';
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute(array(
-            $_SESSION['username'],
-            $_POST['story_id'],
-            filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-        ));
-        header("Location: /story/?id=" . $_POST['story_id']);
+        $params = array(
+            'username' => $_SESSION['username'],
+            'story_id' => intval($_POST['story_id']),
+            'comment' => filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+            );
+        $this->commentModel->createComment($params);
+        header("Location: /story/?id=" . $params['story_id']);
     }
     
 }

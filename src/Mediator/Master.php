@@ -1,8 +1,8 @@
 <?php
 
-namespace MasterClass;
+namespace MasterClass\Mediator;
 
-class MasterController {
+class Master {
     
     private $config;
     

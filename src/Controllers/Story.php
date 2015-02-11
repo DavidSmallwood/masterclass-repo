@@ -2,39 +2,43 @@
 
 namespace MasterClass\Controllers;
 
-use PDO;
+
+use MasterClass\Model\Story as StoryModel;
+use MasterClass\Model\Comment as CommentModel;
 
 class Story {
     
+    protected $storyModel;
+    protected $commentModel;
+
+
     public function __construct($config) {
-        $dbconfig = $config['database'];
-        $dsn = 'mysql:host=' . $dbconfig['host'] . ';dbname=' . $dbconfig['name'];
-        $this->db = new PDO($dsn, $dbconfig['user'], $dbconfig['pass']);
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $this->storyModel = new StoryModel($config);
+      $this->commentModel = new CommentModel($config);
     }
     
+    private function cleanParams() {
+      return array('headline' => $_POST['headline'],
+                   'url' => $_POST['url'],
+                   'username' => $_SESSION['username']
+                  );
+    }
+
     public function index() {
         if(!isset($_GET['id'])) {
             header("Location: /");
             exit;
         }
         
-        $story_sql = 'SELECT * FROM story WHERE id = ?';
-        $story_stmt = $this->db->prepare($story_sql);
-        $story_stmt->execute(array($_GET['id']));
-        if($story_stmt->rowCount() < 1) {
+        $story = $this->storyModel->getStory($_GET['id']);
+
+        if(empty($story) || !isset($story['id'])) {
             header("Location: /");
             exit;
         }
         
-        $story = $story_stmt->fetch(PDO::FETCH_ASSOC);
-        
-        $comment_sql = 'SELECT * FROM comment WHERE story_id = ?';
-        $comment_stmt = $this->db->prepare($comment_sql);
-        $comment_stmt->execute(array($story['id']));
-        $comment_count = $comment_stmt->rowCount();
-        $comments = $comment_stmt->fetchAll(PDO::FETCH_ASSOC);
-
+        $comment_count = $this->commentModel->getCommentCount($story['id']);
+        $comments = $this->commentModel->getComments($story['id']);
         $content = '
             <a class="headline" href="' . $story['url'] . '">' . $story['headline'] . '</a><br />
             <span class="details">' . $story['created_by'] . ' | ' . $comment_count . ' Comments | 
@@ -75,19 +79,12 @@ class Story {
                !filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL)) {
                 $error = 'You did not fill in all the fields or the URL did not validate.';       
             } else {
-                $sql = 'INSERT INTO story (headline, url, created_by, created_on) VALUES (?, ?, ?, NOW())';
-                $stmt = $this->db->prepare($sql);
-                $stmt->execute(array(
-                   $_POST['headline'],
-                   $_POST['url'],
-                   $_SESSION['username'],
-                ));
-                
-                $id = $this->db->lastInsertId();
-                header("Location: /story/?id=$id");
-                exit;
+              $params = $this->cleanParams();
+              $id = $this->storyModel->createStory($params);
+              header("Location: /story/?id=$id");
+              exit;
             }
-        }
+        } else {
         
         $content = '
             <form method="post">
@@ -98,8 +95,11 @@ class Story {
                 <input type="submit" name="create" value="Create" />
             </form>
         ';
+        }
         
         require_once '../tpl/layout.phtml';
     }
+    
+
     
 }
