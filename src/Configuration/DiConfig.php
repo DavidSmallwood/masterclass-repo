@@ -37,15 +37,22 @@ class DiConfig extends Config
 
         $di->params['MasterClass\Controllers\Comment'] = [
             'commentModel' => $di->lazyNew('MasterClass\Model\Comment'),
+            'request' => $di->lazyNew('Aura\Web\Request'),
+            'response' => $di->lazyNew('Aura\Web\Response'),
         ];
 
         $di->params['MasterClass\Controllers\Story'] = [
             'storyModel' => $di->lazyNew('MasterClass\Model\Story'),
-            'commentModel' => $di->lazyNew('MasterClass\Model\Comment'),
+            'request' => $di->lazyNew('Aura\Web\Request'),
+            'response' => $di->lazyNew('Aura\Web\Response'),
+            'view' => $di->lazyNew('Aura\View\View'),
         ];
 
         $di->params['MasterClass\Controllers\Index'] = [
             'storyModel' => $di->lazyNew('MasterClass\Model\Story'),
+            'request' => $di->lazyNew('Aura\Web\Request'),
+            'response' => $di->lazyNew('Aura\Web\Response'),
+            'view' => $di->lazyNew('Aura\View\View'),
         ];
 
         $di->params['MasterClass\Controllers\User'] = [

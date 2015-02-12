@@ -10,6 +10,8 @@ $config = function() use ($path) {
   return require ($path . '/config/config.php');
 };
 
+$configuration = require ($path . '/config/config.php');
+
 $diContainerBuilder = new Aura\Di\ContainerBuilder();
 $di = $diContainerBuilder->newInstance(['config' => $config],
                                        ['MasterClass\Configuration\DiConfig',
