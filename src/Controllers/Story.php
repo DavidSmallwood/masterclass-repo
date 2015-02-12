@@ -12,9 +12,9 @@ class Story {
     protected $commentModel;
 
 
-    public function __construct($config) {
-      $this->storyModel = new StoryModel($config);
-      $this->commentModel = new CommentModel($config);
+    public function __construct(StoryModel $story, CommentModel $comment) {
+      $this->storyModel = $story;
+      $this->commentModel = $comment;
     }
     
     private function cleanParams() {

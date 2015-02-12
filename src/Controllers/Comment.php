@@ -8,8 +8,8 @@ class Comment {
     
     protected $commentModel;
     
-    public function __construct($config) {
-        $this->commentModel = new CommentModel($config['database']);
+    public function __construct(CommentModel $comment) {
+        $this->commentModel = $comment;
     }
     
     public function create() {

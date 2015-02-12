@@ -4,20 +4,13 @@ namespace MasterClass\Model;
 
 use PDO;
 
-/**
- * Model for Story
- *
- */
 class Story {
   
   protected $db;
   protected $dbconfig;
   
-  public function __construct($config) {
-    $this->dbconfig = $config['database'];
-    $dsn = 'mysql:host=' . $this->dbconfig['host'] . ';dbname=' . $this->dbconfig['name'];
-    $this->db = new PDO($dsn, $this->dbconfig['user'], $this->dbconfig['pass']);
-    $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  public function __construct(PDO $pdo) {
+    $this->db = $pdo;
   }
   
   public function getStory ($id) {

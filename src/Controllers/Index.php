@@ -11,10 +11,9 @@ class Index {
     protected $commentModel;
     protected $storyModel;
     
-    public function __construct($config) {
-
-        $this->commentModel = new CommentModel($config);
-        $this->storyModel = new StoryModel($config);
+    public function __construct(StoryModel $story, CommentModel $comment) {
+        $this->storyModel = $story;
+        $this->commentModel = $comment;
     }
     
     public function index() {

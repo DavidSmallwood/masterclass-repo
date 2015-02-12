@@ -2,12 +2,17 @@
 
 namespace MasterClass\Mediator;
 
+use Aura\Di\Container as AuraContainer;
+
 class Master {
     
-    private $config;
+    public $config;
     
-    public function __construct($config) {
-        $this->_setupConfig($config);
+    public $container;
+    
+    public function __construct(AuraContainer $container, array $config = []) {
+        $this->config = $config;
+        $this->container = $container;
     }
     
     public function execute() {
@@ -15,11 +20,11 @@ class Master {
         $call_class = $call['call'];
         $class = ucfirst(array_shift($call_class));
         $method = array_shift($call_class);
-        $o = new $class($this->config);
+        $o = $this->container->newInstance($class);
         return $o->$method();
     }
     
-    private function _determineControllers()
+    protected function _determineControllers()
     {
         if (isset($_SERVER['REDIRECT_BASE'])) {
             $rb = $_SERVER['REDIRECT_BASE'];
@@ -45,10 +50,5 @@ class Master {
         }
         
         return $return;
-    }
-    
-    private function _setupConfig($config) {
-        $this->config = $config;
-    }
-    
+    }    
 }
