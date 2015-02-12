@@ -24,7 +24,7 @@ class Comment {
             'comment' => filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
             );
         $this->commentModel->createComment($params);
-        header("Location: /story/?id=" . $params['story_id']);
+        header("Location: /story?id=" . $params['story_id']);
     }
     
 }

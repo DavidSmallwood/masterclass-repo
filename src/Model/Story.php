@@ -2,36 +2,33 @@
 
 namespace MasterClass\Model;
 
-use PDO;
+use MasterClass\Dbal\AbstractDb;
+
 
 class Story {
   
   protected $db;
   protected $dbconfig;
   
-  public function __construct(PDO $pdo) {
-    $this->db = $pdo;
+  public function __construct(AbstractDb $db) {
+    $this->db = $db;
   }
   
   public function getStory ($id) {
-    $story_sql = 'SELECT * FROM story WHERE id = ?';
-    $story_stmt = $this->db->prepare($story_sql);
-    $story_stmt->execute(array($id));
-    return $story_stmt->fetch(PDO::FETCH_ASSOC);
-    
+    $sql = 'SELECT * FROM story WHERE id = ?';
+    return $this->db->fetchOne($sql, [$id]);
+
   }
   public function getStoryList () {
     $sql = 'SELECT * FROM story ORDER BY created_on DESC';
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC); 
+    return $this->db->fetchAll($sql);
+
   }
   
   public function createStory ($params) {
 
     $sql = 'INSERT INTO story (headline, url, created_by, created_on) VALUES (?, ?, ?, NOW())';  
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute(array(
+    $this->db->execute(array(
       $params['headline'],
       $params['url'],
       $params['username'],

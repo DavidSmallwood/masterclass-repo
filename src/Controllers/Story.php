@@ -81,13 +81,13 @@ class Story {
             } else {
               $params = $this->cleanParams();
               $id = $this->storyModel->createStory($params);
-              header("Location: /story/?id=$id");
+              header("Location: /story?id=$id");
               exit;
             }
         } else {
         
         $content = '
-            <form method="post">
+            <form method="post" action="/story/create/save">
                 ' . $error . '<br />
         
                 <label>Headline:</label> <input type="text" name="headline" value="" /> <br />
