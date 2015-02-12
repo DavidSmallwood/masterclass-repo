@@ -1,6 +1,6 @@
 <?php
 
-namespace MasterClass\Router\Route;
+namespace MasterClass\Route;
 
 interface RouteInterface
 {

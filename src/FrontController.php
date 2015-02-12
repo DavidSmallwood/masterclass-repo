@@ -1,11 +1,11 @@
 <?php
 
-namespace MasterClass\Mediator;
+namespace MasterClass;
 
 use Aura\Di\Container as AuraContainer;
-use MasterClass\Router\Router;
+use MasterClass\Router;
 
-class Master {
+class FrontController {
     
     protected $config;
     

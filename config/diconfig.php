@@ -19,7 +19,7 @@ $di->params['MasterClass\Model\Story'] = [
     'pdo' => $di->lazyNew('PDO'),
 ];
 
-$di->params['MasterClass\Mediator\Master'] = [
+$di->params['MasterClass\FrontController'] = [
     'container' => $di,
     'config' => $config,
 ];

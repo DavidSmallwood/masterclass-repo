@@ -16,6 +16,6 @@ $di = $diContainerBuilder->newInstance(['config' => $config],
                                         'MasterClass\Configuration\RouterConfig']);
  
  
-$framework = $di->newInstance('MasterClass\Mediator\Master');
+$framework = $di->newInstance('MasterClass\FrontController');
 echo $framework->execute();
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace MasterClass\Router;
+namespace MasterClass;
 
-use MasterClass\Router\Route\RouteInterface;
+use MasterClass\Route\RouteInterface;
 
 class Router
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace MasterClass\Router\Route;
+namespace MasterClass\Route;
 
-class GetRoute extends AbstractRoute
+class PostRoute extends AbstractRoute
 {
     public function matchRoute($requestPath, $requestType)
     {
-        if($requestType != 'GET') {
+        if($requestType != 'POST') {
             return false;
         }
 

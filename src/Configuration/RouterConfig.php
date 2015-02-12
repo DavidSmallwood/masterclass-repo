@@ -4,8 +4,8 @@ namespace MasterClass\Configuration;
 
 use Aura\Di\Config;
 use Aura\Di\Container;
-use MasterClass\Router\Route\GetRoute;
-use MasterClass\Router\Route\PostRoute;
+use MasterClass\Route\GetRoute;
+use MasterClass\Route\PostRoute;
 
 class RouterConfig extends Config
 {
@@ -24,7 +24,7 @@ class RouterConfig extends Config
             }
         }
 
-        $di->params['MasterClass\Router\Router'] = [
+        $di->params['MasterClass\Router'] = [
             'serverVars' => $_SERVER,
             'routes' => $routeObj,
         ];

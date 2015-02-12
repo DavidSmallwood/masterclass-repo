@@ -29,10 +29,10 @@ class DiConfig extends Config
             'db' => $di->lazyNew('MasterClass\Dbal\Mysql'),
         ];
 
-        $di->params['MasterClass\Mediator\Master'] = [
+        $di->params['MasterClass\FrontController'] = [
             'container' => $di,
             'config' => $config,
-            'router' => $di->lazyNew('MasterClass\Router\Router'),
+            'router' => $di->lazyNew('MasterClass\Router'),
         ];
 
         $di->params['MasterClass\Controllers\Comment'] = [

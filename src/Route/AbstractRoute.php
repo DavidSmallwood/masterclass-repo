@@ -1,6 +1,6 @@
 <?php
 
-namespace MasterClass\Router\Route;
+namespace MasterClass\Route;
 
 abstract class AbstractRoute implements RouteInterface
 {
