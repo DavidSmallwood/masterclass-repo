@@ -116,7 +116,7 @@ class User {
                 ' . $error . '<br />
             <label>Password</label> <input type="password" name="password" value="" /><br />
             <label>Password Again</label> <input type="password" name="password_check" value="" /><br />
-            <input type="submit" name="updatepw" value="Create User" />
+            <input type="submit" name="updatepw" value="Update Password" />
         </form>';
         
         require_once '../tpl/layout.phtml';
