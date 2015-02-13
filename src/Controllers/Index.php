@@ -24,13 +24,11 @@ class Index {
         $this->response = $response;
         $this->request = $request;
         $this->template = $view;
-        //var_dump(array('story' => $story, 'response' => $response, 'request' => $request, 'view' => $view));
     }
     
     public function index() {
         
         $stories = $this->storyModel->getStoryList();
-        
         $this->template->setLayout('layout');
         $this->template->setView('index');
 

@@ -29,7 +29,7 @@ class FrontController {
         $o = $this->container->newInstance($class);
         $response = $o->$method();
         if ($response instanceof Response) {
-            
+            $this->sendResponse($response);
         }
     }
     

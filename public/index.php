@@ -14,8 +14,7 @@ $configuration = require ($path . '/config/config.php');
 
 $diContainerBuilder = new Aura\Di\ContainerBuilder();
 $di = $diContainerBuilder->newInstance(['config' => $config],
-                                       ['MasterClass\Configuration\DiConfig',
-                                        'MasterClass\Configuration\RouterConfig']);
+                                       $configuration['config_classes']);
  
  
 $framework = $di->newInstance('MasterClass\FrontController');

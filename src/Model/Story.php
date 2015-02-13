@@ -21,8 +21,13 @@ class Story {
   }
   public function getStoryList () {
     $sql = 'SELECT * FROM story ORDER BY created_on DESC';
-    return $this->db->fetchAll($sql);
-
+    $stories = $this->db->fetchAll($sql);
+          foreach($stories as $key => $story) {
+            $comment_sql = 'SELECT COUNT(*) as `count` FROM comment WHERE story_id = ?';
+            $count = $this->db->fetchOne($comment_sql, [$story['id']]);
+            $stories[$key]['comment_count'] = $count['count'];
+        }
+    return $stories;
   }
   
   public function createStory ($params) {

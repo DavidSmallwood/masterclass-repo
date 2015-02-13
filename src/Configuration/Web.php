@@ -77,6 +77,7 @@ class Web extends Config
         /**
          * Aura\Web\Response
          */
+        /*
         $di->params['Aura\Web\Response'] = array(
             'status'   => $di->lazyGet('aura/web:response_status'),
             'headers'  => $di->lazyGet('aura/web:response_headers'),
@@ -85,7 +86,15 @@ class Web extends Config
             'cache'    => $di->lazyGet('aura/web:response_cache'),
             'redirect' => $di->lazyNew('Aura\Web\Response\Redirect'),
         );
-
+*/
+        $di->params['Aura\Web\Response'] = array(
+            'status'   => $di->lazyGet('aura/web:response_status'),
+            'headers'  => $di->lazyGet('aura/web:response_headers'),
+            'cookies'  => $di->lazyNew('Aura\Web\Response\Cookies'),
+            'content'  => $di->lazyNew('Aura\Web\Response\Content'),
+            'cache'    => $di->lazyGet('aura/web:response_cache'),
+            'redirect' => $di->lazyNew('Aura\Web\Response\Redirect'),
+        );
         /**
          * Aura\Web\Response\Headers
          */
