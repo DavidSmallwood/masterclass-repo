@@ -22,20 +22,21 @@ $di->params['MasterClass\Model\Story'] = [
 $di->params['MasterClass\FrontController'] = [
     'container' => $di,
     'config' => $config,
+    'router' => $di->lazyNew('MasterClass\Router'),
 ];
 
 $di->params['MasterClass\Controllers\Comment'] = [
-    'commentModel' => $di->lazyNew('Masterclass\Model\Comment'),
+    'commentModel' => $di->lazyNew('MasterClass\Model\Comment'),
 ];
 
 $di->params['MasterClass\Controllers\Story'] = [
-    'storyModel' => $di->lazyNew('Masterclass\Model\Story'),
-    'commentModel' => $di->lazyNew('Masterclass\Model\Comment'),
+    'storyModel' => $di->lazyNew('MasterClass\Model\Story'),
+    'commentModel' => $di->lazyNew('MasterClass\Model\Comment'),
 ];
 
 $di->params['MasterClass\Controllers\Index'] = [
-    'storyModel' => $di->lazyNew('Masterclass\Model\Story'),
-    'commentModel' => $di->lazyNew('Masterclass\Model\Comment'),
+    'storyModel' => $di->lazyNew('MasterClass\Model\Story'),
+    'commentModel' => $di->lazyNew('MasterClass\Model\Comment'),
 ];
 
 $di->params['MasterClass\Controllers\User'] = [
